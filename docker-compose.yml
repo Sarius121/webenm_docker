@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+  schild-webenm:
+    build: './schild_webenm/'
+    depends_on:
+      - mdb-connector-server
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - grade-tmp-files:/var/www/html/grade-files/tmp/
+  mdb-connector-server:
+    build: './mdb_connector_server/'
+    networks:
+      - backend
+    ports:
+      - ":8080"
+    volumes:
+      - grade-tmp-files:/var/www/html/grade-files/tmp/
+volumes:
+  grade-tmp-files:
+networks:
+  frontend:
+  backend:
